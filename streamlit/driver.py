@@ -15,5 +15,5 @@ def read_query(query, params={}):
 
 def get_article_text(title):
     text = read_query(
-        "MATCH (a:Article {webTitle:$title}) RETURN a.bodyContent as text", {'title': title})
+        "MATCH (a:Article {webTitle:$title}) RETURN a.bodyContent as response", {'title': title})
     return text
