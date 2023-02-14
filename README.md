@@ -51,3 +51,7 @@ Testing dataset consists of 1000 latest articles from Kaggle repository: https:/
 
 The information extraction pipeline was executed with Diffbot API: See `notebooks/Preprocess.ipynb`.
 
+## Feedback
+
+Please create an issue if you have any feedback!
+
