@@ -17,7 +17,31 @@ docker-compose up
 sh seed_database.sh
 ```
 
+If you are using Windows, you can also execute the `notebooks/Import.ipynb` notebook for initial import
+
 4. Open localhost:8501 in your browser
+
+## Example questions
+
+What are the latest news?
+
+What are the latest news about Apple?
+
+What are the latest news about COVID-19?
+
+What are the latest news about education?
+
+Who was mentioned in a positive light lately?
+
+Most mentioned people in the last 100 articles?
+
+What are the latest facts?
+
+What do you know about Andrew Macintosh?
+
+Where does Ian Chubb work?
+
+What are most mentioned people in sports?
 
 ## Data 
 
