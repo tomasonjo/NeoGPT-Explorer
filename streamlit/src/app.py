@@ -1,3 +1,4 @@
+import os
 import openai
 import streamlit as st
 from streamlit_chat import message
@@ -7,8 +8,7 @@ from train_cypher import examples
 
 st.title("NeoGPT : GPT3 + Neo4j")
 
-# st.secrets["api_secret"]
-openai.api_key = "<<OPEN AI KEY>>"
+openai.api_key = os.environ.get('OPENAI_KEY')
 
 
 def generate_response(prompt, cypher=True):
