@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 import json
 from graphdatascience import GraphDataScience
 import pandas as pd
@@ -8,8 +5,8 @@ import pandas as pd
 host = "bolt://localhost:7687"
 user = "neo4j"
 password = "pleaseletmein"
-
 gds = GraphDataScience(host, auth=(user, password))
+
 articles = pd.read_csv("data/articles.csv")
 
 gds.run_cypher(
@@ -20,6 +17,11 @@ CREATE CONSTRAINT IF NOT EXISTS FOR (a:Article) REQUIRE a.id IS UNIQUE;
 gds.run_cypher(
     """
 CREATE CONSTRAINT IF NOT EXISTS FOR (s:Section) REQUIRE s.name IS UNIQUE;
+"""
+)
+gds.run_cypher(
+    """
+CREATE TEXT INDEX articletitle IF NOT EXISTS FOR (a:Article) ON a.webTitle;
 """
 )
 
@@ -38,17 +40,16 @@ gds.run_cypher(article_import_query, {"data": articles.to_dict("records")})
 with open("data/nlp_output.json") as file:
     nlp_output = json.load(file)
 
-
 gds.run_cypher(
     """
 CREATE CONSTRAINT IF NOT EXISTS FOR (e:Entity) REQUIRE e.id IS UNIQUE;
 """
 )
 
-
 nlp_import_query = """
 UNWIND $data AS row
 MATCH (a:Article {id: row.id})
+SET a.sentiment = row.sentiment
 FOREACH (entity in row.entity | 
   MERGE (e:Entity {id: entity.name})
   ON CREATE SET e.type = entity.type,

@@ -2,6 +2,9 @@ examples = """
 # What are the latest news?
 MATCH (a:Article) RETURN a.webTitle AS response ORDER BY a.date DESC LIMIT 3
 
+# What are the latest positive news?
+MATCH (a:Article) WHERE a.sentiment > 0 RETURN a.webTitle AS response ORDER BY a.date DESC LIMIT 3
+
 # What are the latest news about Apple?
 MATCH (e:Entity {id:"Apple"})<-[m:MENTIONS]-(a) RETURN a.webTitle AS response ORDER BY m.confidence DESC LIMIT 3
 
@@ -26,6 +29,6 @@ CALL {MATCH (s:Entity {id:"Andrew Macintosh"})-[:RELATIONSHIP]->(rel)-[:RELATION
 # Where does Ian Chubb work?
 MATCH (e:Entity {id:"Ian Chubb"})-[:RELATIONSHIP]->({type:"EMPLOYEE_OR_MEMBER_OF"})-[:RELATIONSHIP]->(target) RETURN target.id AS response
 
-# What are most mentioned people in sports?
+# Who are most mentioned people in sports?
 MATCH (entity {type:"person"})<-[:MENTIONS]-(a:Article)-[:HAS_SECTION]->({name:"Sport"}) WITH entity, count(*) AS mentions ORDER BY mentions DESC LIMIT 3 RETURN entity.id AS response
 """
