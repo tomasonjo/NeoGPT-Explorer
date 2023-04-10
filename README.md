@@ -1,5 +1,7 @@
 # NeoGPT-Explorer
 
+Find more information at: https://medium.com/neo4j/knowledge-graph-based-chatbot-with-gpt-3-and-neo4j-c4ebbd325ed
+
 Run the following commands to start the services:
 
 
